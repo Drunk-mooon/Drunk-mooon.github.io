@@ -19,24 +19,24 @@ const projects = (await getCollection('projects'))
 <Base title="Yang Ziyue">
   {/* ============ 区块 1：个人简介与照片 ============ */}
   <section id="about" class="hero">
-    <img src="/images/avatar.jpg" alt="Yang Ziyue" class="avatar" />
+    <img src="/images/avatar.png" alt="Yang Ziyue" class="avatar" />
     <h1>Yang Ziyue</h1>
     <p class="subtitle">
-      PhD Student @ SJTU · AI for Science · Indie Game Developer
+      Master Student @ SJTU · AI Agents · Indie Game Developer
     </p>
     <p class="bio">
-      一句话简介：研究方向 / 学校 / 现状。把这里改成你的真实介绍，
-      也可以换成英文或中英双语版本。
+      I am a master's student in the School of Computer Science at Shanghai Jiao Tong University. I'm studying at <a href="http://speechlab.sjtu.edu.cn/" target="_blank" rel="noopener">X-lance lab</a> under the guidance of Professcor ChenLu
     </p>
     <p class="bio">
-      欢迎来到我的个人主页。这里收录了我的<a href="#papers">研究论文</a>、
-      业余时间<a href="#games">制作的游戏</a>，以及参与的<a href="#projects">开源项目</a>。
+      Welcome to my personal sites. Here includes <a href="#papers">Research Papers</a>,
+      <a href="#games">Game Made</a>, and participated <a href="#projects">Open-Source Repositories</a>.
+      My research interests lie in scientific research agents and reinforcement learning. 
+      Additionally, I am an entry-level game developer who has undertaken program and design roles for several independent games.
     </p>
     <div class="links">
-      <a href="mailto:YOUR_EMAIL@example.com">✉️ Email</a>
-      <a href="https://github.com/YOUR_GITHUB_USERNAME" target="_blank" rel="noopener">🐙 GitHub</a>
-      <a href="https://scholar.google.com/citations?user=YOUR_SCHOLAR_ID" target="_blank" rel="noopener">🎓 Scholar</a>
-      <a href="https://twitter.com/YOUR_TWITTER" target="_blank" rel="noopener">🐦 Twitter</a>
+      <a href="mailto:1369700255@qq.com">✉️ Email</a>
+      <a href="https://github.com/Drunk-mooon" target="_blank" rel="noopener">🐙 GitHub</a>
+      <a href="https://twitter.com/DrunkMooon_" target="_blank" rel="noopener">🐦 Twitter</a>
     </div>
   </section>
 
@@ -60,6 +60,8 @@ const projects = (await getCollection('projects'))
             pdf={p.data.pdf}
             code={p.data.code}
             project={p.data.project}
+            poster={p.data.poster}
+            tldr={p.data.tldr}
             abstract={p.data.abstract}
           />
         ))}
@@ -85,6 +87,7 @@ const projects = (await getCollection('projects'))
             platform={g.data.platform}
             year={g.data.year}
             link={g.data.link}
+            video={g.data.video}
             description={g.data.description}
             role={g.data.role}
           />

@@ -7,23 +7,74 @@ interface Props {
   pdf?: string;
   code?: string;
   project?: string;
+  poster?: string;
+  tldr?: string;
   abstract?: string;
 }
 
-const { title, authors, venue, year, pdf, code, project, abstract } = Astro.props;
+const { title, authors, venue, year, pdf, code, project, poster, tldr, abstract } = Astro.props;
+
+// 支持在 authors 字段里用 **xxx** 加粗。
+// 先 HTML 转义防 XSS（数据来自本地 frontmatter，安全可控），再把 **xxx** 转为 <strong>。
+function renderInline(s: string): string {
+  const esc = s
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;');
+  return esc.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
+}
+const authorsHtml = renderInline(authors);
 ---
 
 <li class="card">
   <h3>{title}</h3>
-  <p class="meta">{authors} · <i>{venue}</i>, {year}</p>
+
+  {/* venue 单独成行：只加粗、不加背景框 */}
+  <p class="venue">
+    <strong class="venue-name">{venue}</strong>
+    <span class="venue-year">{year}</span>
+  </p>
+
+  <p class="meta">
+    <span set:html={authorsHtml}></span>
+  </p>
+
+  {tldr && <p class="tldr">{tldr}</p>}
   {abstract && <p class="abstract">{abstract}</p>}
   <p class="links">
     {pdf && <a href={pdf} target="_blank" rel="noopener">📄 PDF</a>}
     {code && <a href={code} target="_blank" rel="noopener">💻 Code</a>}
     {project && <a href={project} target="_blank" rel="noopener">🌐 Project</a>}
+    {poster && <a href={poster} target="_blank" rel="noopener">🖼 Poster</a>}
   </p>
 </li>
 
 <style>
   .abstract { color: var(--color-fg); font-size: 0.95rem; margin: 0.5rem 0; }
+
+  .tldr {
+    font-size: 0.95rem;
+    margin: 0.6rem 0;
+    padding: 0.5rem 0.85rem;
+    border-left: 3px solid var(--color-accent);
+    background: var(--color-card);
+    color: var(--color-fg);
+    border-radius: 0 4px 4px 0;
+  }
+
+  .venue {
+    margin: 0.4rem 0 0.5rem;
+    font-size: 0.9rem;
+    color: var(--color-muted);
+  }
+  .venue-name {
+    font-weight: 700;
+  }
+  .venue-year {
+    font-family: var(--font-mono);
+    color: var(--color-muted);
+    font-size: 0.9rem;
+    margin-left: 0.5rem;
+    font-weight: 500;
+  }
 </style>

@@ -5,11 +5,16 @@ interface Props {
   platform: string;
   year: number;
   link?: string;
+  video?: string;
   description: string;
   role?: string;
 }
 
-const { title, cover, platform, year, link, description, role } = Astro.props;
+const { title, cover, platform, year, link, video, description, role } = Astro.props;
+
+// 把链接显示成纯净的地址（去掉 https:// 和末尾斜杠），便于一眼看清指向哪里
+const displayLink = link?.replace(/^https?:\/\//, '').replace(/\/$/, '');
+const displayVideo = video?.replace(/^https?:\/\//, '').replace(/\/$/, '');
 ---
 
 <li class="card game-card">
@@ -18,7 +23,14 @@ const { title, cover, platform, year, link, description, role } = Astro.props;
     <h3>{title}</h3>
     <p class="meta">{platform} · {year}{role && ` · ${role}`}</p>
     <p>{description}</p>
-    {link && <p class="links"><a href={link} target="_blank" rel="noopener">▶ Play / Download</a></p>}
+
+    {/* link 和 video 放在同一个 .links 段落里，自动用 anchor 间距分隔 */}
+    {(link || video) && (
+      <p class="links">
+        {link && <a href={link} target="_blank" rel="noopener">{displayLink}</a>}
+        {video && <a href={video} target="_blank" rel="noopener">🎬 {displayVideo}</a>}
+      </p>
+    )}
   </div>
 </li>
 

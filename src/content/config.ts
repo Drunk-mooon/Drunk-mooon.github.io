@@ -9,8 +9,10 @@ const papers = defineCollection({
     pdf: z.string().url().optional(),
     code: z.string().url().optional(),
     project: z.string().url().optional(),
+    poster: z.string().url().optional(),
+    tldr: z.string().optional(),
     abstract: z.string().optional(),
-    date: z.date(), // 用于同一年内的二级排序
+    date: z.coerce.date(), // 用于同一年内的二级排序
   }),
 });
 
@@ -21,9 +23,10 @@ const games = defineCollection({
     platform: z.string(),
     year: z.number(),
     link: z.string().url().optional(),
+    video: z.string().url().optional(),
     description: z.string(),
     role: z.string().optional(),
-    date: z.date(),
+    date: z.coerce.date(),
   }),
 });
 
@@ -33,7 +36,7 @@ const projects = defineCollection({
     description: z.string(),
     github: z.string().url(),
     tags: z.array(z.string()).default([]),
-    date: z.date(),
+    date: z.coerce.date(),
   }),
 });
 
