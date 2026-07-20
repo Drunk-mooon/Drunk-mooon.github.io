@@ -1,0 +1,32 @@
+---
+interface Props {
+  title: string;
+  description: string;
+  github: string;
+  tags?: string[];
+  year?: number;
+}
+
+const { title, description, github, tags = [], year } = Astro.props;
+---
+
+<li class="card">
+  <h3>
+    <a href={github} target="_blank" rel="noopener">{title}</a>
+  </h3>
+  <p class="meta">
+    <a href={github} target="_blank" rel="noopener" class="repo-link">github.com/.../{github.split('/').slice(-1)[0]}</a>
+    {year && ` · ${year}`}
+  </p>
+  <p>{description}</p>
+  {tags.length > 0 && (
+    <p class="tags">
+      {tags.map(t => <span class="tag">{t}</span>)}
+    </p>
+  )}
+</li>
+
+<style>
+  .card h3 { margin-bottom: 0.25rem; }
+  .repo-link { font-family: var(--font-mono); font-size: 0.85rem; }
+</style>

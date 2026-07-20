@@ -1,0 +1,45 @@
+---
+interface Props {
+  title: string;
+  cover: string;
+  platform: string;
+  year: number;
+  link?: string;
+  description: string;
+  role?: string;
+}
+
+const { title, cover, platform, year, link, description, role } = Astro.props;
+---
+
+<li class="card game-card">
+  <img src={cover} alt={`${title} cover`} class="cover" />
+  <div class="info">
+    <h3>{title}</h3>
+    <p class="meta">{platform} · {year}{role && ` · ${role}`}</p>
+    <p>{description}</p>
+    {link && <p class="links"><a href={link} target="_blank" rel="noopener">▶ Play / Download</a></p>}
+  </div>
+</li>
+
+<style>
+  .game-card {
+    display: flex;
+    gap: 1rem;
+    align-items: flex-start;
+  }
+  .cover {
+    width: 120px;
+    height: 120px;
+    object-fit: cover;
+    border-radius: 6px;
+    flex-shrink: 0;
+    background: var(--color-border);
+  }
+  .info { flex: 1; min-width: 0; }
+  .info h3 { margin-top: 0; }
+  @media (max-width: 520px) {
+    .game-card { flex-direction: column; }
+    .cover { width: 100%; height: 180px; }
+  }
+</style>

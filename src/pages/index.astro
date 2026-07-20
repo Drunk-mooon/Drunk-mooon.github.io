@@ -1,0 +1,171 @@
+---
+import Base from '../layouts/Base.astro';
+import PaperCard from '../components/PaperCard.astro';
+import GameCard from '../components/GameCard.astro';
+import ProjectCard from '../components/ProjectCard.astro';
+import { getCollection } from 'astro:content';
+
+// 收集所有内容，按时间倒序
+const papers = (await getCollection('papers'))
+  .sort((a, b) => b.data.year - a.data.year || +b.data.date - +a.data.date);
+
+const games = (await getCollection('games'))
+  .sort((a, b) => b.data.year - a.data.year || +b.data.date - +a.data.date);
+
+const projects = (await getCollection('projects'))
+  .sort((a, b) => +b.data.date - +a.data.date);
+---
+
+<Base title="Yang Ziyue">
+  {/* ============ 区块 1：个人简介与照片 ============ */}
+  <section id="about" class="hero">
+    <img src="/images/avatar.jpg" alt="Yang Ziyue" class="avatar" />
+    <h1>Yang Ziyue</h1>
+    <p class="subtitle">
+      PhD Student @ SJTU · AI for Science · Indie Game Developer
+    </p>
+    <p class="bio">
+      一句话简介：研究方向 / 学校 / 现状。把这里改成你的真实介绍，
+      也可以换成英文或中英双语版本。
+    </p>
+    <p class="bio">
+      欢迎来到我的个人主页。这里收录了我的<a href="#papers">研究论文</a>、
+      业余时间<a href="#games">制作的游戏</a>，以及参与的<a href="#projects">开源项目</a>。
+    </p>
+    <div class="links">
+      <a href="mailto:YOUR_EMAIL@example.com">✉️ Email</a>
+      <a href="https://github.com/YOUR_GITHUB_USERNAME" target="_blank" rel="noopener">🐙 GitHub</a>
+      <a href="https://scholar.google.com/citations?user=YOUR_SCHOLAR_ID" target="_blank" rel="noopener">🎓 Scholar</a>
+      <a href="https://twitter.com/YOUR_TWITTER" target="_blank" rel="noopener">🐦 Twitter</a>
+    </div>
+  </section>
+
+  <hr class="divider" />
+
+  {/* ============ 区块 2：论文 ============ */}
+  <section id="papers">
+    <h2>📄 Papers</h2>
+    <p class="lead">按发表年份倒序排列。</p>
+
+    {papers.length === 0 ? (
+      <p class="empty">还没有论文。在 <code>src/content/papers/</code> 下新建 <code>.md</code> 文件即可添加。</p>
+    ) : (
+      <ul class="cards">
+        {papers.map(p => (
+          <PaperCard
+            title={p.data.title}
+            authors={p.data.authors}
+            venue={p.data.venue}
+            year={p.data.year}
+            pdf={p.data.pdf}
+            code={p.data.code}
+            project={p.data.project}
+            abstract={p.data.abstract}
+          />
+        ))}
+      </ul>
+    )}
+  </section>
+
+  <hr class="divider" />
+
+  {/* ============ 区块 3：游戏 ============ */}
+  <section id="games">
+    <h2>🎮 Games</h2>
+    <p class="lead">我参与或独立制作的游戏作品。</p>
+
+    {games.length === 0 ? (
+      <p class="empty">还没有游戏。在 <code>src/content/games/</code> 下新建 <code>.md</code> 文件即可添加。</p>
+    ) : (
+      <ul class="cards">
+        {games.map(g => (
+          <GameCard
+            title={g.data.title}
+            cover={g.data.cover}
+            platform={g.data.platform}
+            year={g.data.year}
+            link={g.data.link}
+            description={g.data.description}
+            role={g.data.role}
+          />
+        ))}
+      </ul>
+    )}
+  </section>
+
+  <hr class="divider" />
+
+  {/* ============ 区块 4：开源项目 ============ */}
+  <section id="projects">
+    <h2>🛠 Open Source Projects</h2>
+    <p class="lead">我在 GitHub 上维护或主要参与的开源项目。</p>
+
+    {projects.length === 0 ? (
+      <p class="empty">还没有项目。在 <code>src/content/projects/</code> 下新建 <code>.md</code> 文件即可添加。</p>
+    ) : (
+      <ul class="cards">
+        {projects.map(p => (
+          <ProjectCard
+            title={p.data.title}
+            description={p.data.description}
+            github={p.data.github}
+            tags={p.data.tags}
+            year={p.data.date.getFullYear()}
+          />
+        ))}
+      </ul>
+    )}
+  </section>
+</Base>
+
+<style>
+  .hero {
+    text-align: center;
+    padding: 2.5rem 0 2rem;
+  }
+  .avatar {
+    width: 160px;
+    height: 160px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid var(--color-border);
+  }
+  .hero h1 {
+    margin: 1rem 0 0.25rem;
+    font-size: 2rem;
+  }
+  .subtitle {
+    color: var(--color-muted);
+    margin: 0 0 1rem;
+  }
+  .bio {
+    max-width: 620px;
+    margin: 0 auto 0.75rem;
+    color: var(--color-fg);
+  }
+  .links {
+    margin-top: 1.25rem;
+  }
+  .links a {
+    margin: 0 0.4rem;
+    display: inline-block;
+  }
+
+  section { scroll-margin-top: 70px; }
+
+  .lead { color: var(--color-muted); margin-top: -0.5rem; }
+
+  .divider {
+    border: none;
+    border-top: 1px solid var(--color-border);
+    margin: 3rem 0;
+  }
+
+  .empty {
+    background: var(--color-card);
+    border: 1px dashed var(--color-border);
+    padding: 1.5rem;
+    border-radius: 6px;
+    color: var(--color-muted);
+  }
+</style>

@@ -1,0 +1,50 @@
+---
+const links = [
+  { href: '#about', label: 'About' },
+  { href: '#papers', label: 'Papers' },
+  { href: '#games', label: 'Games' },
+  { href: '#projects', label: 'Projects' },
+];
+---
+
+<header class="nav">
+  <div class="nav-inner">
+    <a href="#about" class="brand">Yang Ziyue</a>
+    <nav>
+      {links.map(l => (
+        <a href={l.href} class="nav-link">{l.label}</a>
+      ))}
+    </nav>
+  </div>
+</header>
+
+<style>
+  .nav {
+    border-bottom: 1px solid var(--color-border);
+    background: var(--color-bg);
+    position: sticky;
+    top: 0;
+    z-index: 10;
+  }
+  .nav-inner {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 0.9rem 1.25rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+  .brand {
+    font-weight: 600;
+    color: var(--color-fg);
+    font-size: 1.05rem;
+  }
+  .brand:hover { text-decoration: none; }
+  nav { display: flex; gap: 1.2rem; flex-wrap: wrap; }
+  .nav-link {
+    color: var(--color-muted);
+    font-size: 0.95rem;
+  }
+  .nav-link:hover { color: var(--color-fg); text-decoration: none; }
+</style>

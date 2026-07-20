@@ -1,0 +1,29 @@
+---
+interface Props {
+  title: string;
+  authors: string;
+  venue: string;
+  year: number;
+  pdf?: string;
+  code?: string;
+  project?: string;
+  abstract?: string;
+}
+
+const { title, authors, venue, year, pdf, code, project, abstract } = Astro.props;
+---
+
+<li class="card">
+  <h3>{title}</h3>
+  <p class="meta">{authors} · <i>{venue}</i>, {year}</p>
+  {abstract && <p class="abstract">{abstract}</p>}
+  <p class="links">
+    {pdf && <a href={pdf} target="_blank" rel="noopener">📄 PDF</a>}
+    {code && <a href={code} target="_blank" rel="noopener">💻 Code</a>}
+    {project && <a href={project} target="_blank" rel="noopener">🌐 Project</a>}
+  </p>
+</li>
+
+<style>
+  .abstract { color: var(--color-fg); font-size: 0.95rem; margin: 0.5rem 0; }
+</style>
