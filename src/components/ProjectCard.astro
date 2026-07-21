@@ -1,29 +1,42 @@
 ---
 interface Props {
   title: string;
-  description: string;
+  description?: string;
   github: string;
   tags?: string[];
   year?: number;
 }
 
 const { title, description, github, tags = [], year } = Astro.props;
+
+// 从 GitHub URL 里抽取仓库名用于显示，比如：
+//   https://github.com/Drunk-mooon/foo  →  foo
+const repoName = github.split('/').filter(Boolean).slice(-1)[0];
 ---
 
 <li class="card">
   <h3>
     <a href={github} target="_blank" rel="noopener">{title}</a>
   </h3>
+
   <p class="meta">
-    <a href={github} target="_blank" rel="noopener" class="repo-link">github.com/.../{github.split('/').slice(-1)[0]}</a>
-    {year && ` · ${year}`}
+    <a href={github} target="_blank" rel="noopener" class="repo-link">
+      github.com/.../{repoName}
+    </a>
+    {year ? ` · ${year}` : null}
   </p>
-  <p>{description}</p>
-  {tags.length > 0 && (
+
+  {description ? (
+    <p>{description}</p>
+  ) : null}
+
+  {tags.length > 0 ? (
     <p class="tags">
-      {tags.map(t => <span class="tag">{t}</span>)}
+      {tags.map((t) => (
+        <span class="tag">{t}</span>
+      ))}
     </p>
-  )}
+  ) : null}
 </li>
 
 <style>

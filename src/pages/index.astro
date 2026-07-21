@@ -30,9 +30,18 @@ const projects = (await getCollection('projects'))
     <p class="bio">
       Welcome to my personal sites. Here includes <a href="#papers">Research Papers</a>,
       <a href="#games">Game Made</a>, and participated <a href="#projects">Open-Source Repositories</a>.
-      My research interests lie in scientific research agents and reinforcement learning. 
+      My research interests lie in scientific research agents and reinforcement learning.
       Additionally, I am an entry-level game developer who has undertaken program and design roles for several independent games.
     </p>
+
+    {/* 个性签名（书法体）—— 直接分区，不加「个人签名：」之类的标签 */}
+    <blockquote class="signature">
+      the orgiastic future that year by year recedes before us. it eluded us then,<br />
+      but that's no matter — tomorrow we will run faster, stretch out arms farther…<br />
+      and one fine morning — so we beat on, boats against the current,<br />
+      borne back ceaselessly into the past. — <em>The Great Gatsby</em>
+    </blockquote>
+
     <div class="links">
       <a href="mailto:1369700255@qq.com">✉️ Email</a>
       <a href="https://github.com/Drunk-mooon" target="_blank" rel="noopener">🐙 GitHub</a>
@@ -45,7 +54,7 @@ const projects = (await getCollection('projects'))
   {/* ============ 区块 2：论文 ============ */}
   <section id="papers">
     <h2>📄 Papers</h2>
-    <p class="lead">按发表年份倒序排列。</p>
+    <p class="lead">Arrange in descending order of publication year.</p>
 
     {papers.length === 0 ? (
       <p class="empty">还没有论文。在 <code>src/content/papers/</code> 下新建 <code>.md</code> 文件即可添加。</p>
@@ -74,7 +83,7 @@ const projects = (await getCollection('projects'))
   {/* ============ 区块 3：游戏 ============ */}
   <section id="games">
     <h2>🎮 Games</h2>
-    <p class="lead">我参与或独立制作的游戏作品。</p>
+    <p class="lead">Game demos that I have participated in or independently produced.</p>
 
     {games.length === 0 ? (
       <p class="empty">还没有游戏。在 <code>src/content/games/</code> 下新建 <code>.md</code> 文件即可添加。</p>
@@ -101,7 +110,7 @@ const projects = (await getCollection('projects'))
   {/* ============ 区块 4：开源项目 ============ */}
   <section id="projects">
     <h2>🛠 Open Source Projects</h2>
-    <p class="lead">我在 GitHub 上维护或主要参与的开源项目。</p>
+    <p class="lead">The open-source projects that I maintain or primarily participate in on GitHub.</p>
 
     {projects.length === 0 ? (
       <p class="empty">还没有项目。在 <code>src/content/projects/</code> 下新建 <code>.md</code> 文件即可添加。</p>
@@ -118,6 +127,16 @@ const projects = (await getCollection('projects'))
         ))}
       </ul>
     )}
+  </section>
+
+  <hr class="divider" />
+
+  {/* ============ 区块 5：爱好（最末，量级最小） ============ */}
+  <section id="hobbies" class="hobbies">
+    <h2>🌿 Hobbies</h2>
+    <p class="hobby-list">
+      🎮 PC GAME · 🎸 Guitar · ✨ ACG · 🏀 Basketball &amp; NBA · 📚 Reading
+    </p>
   </section>
 </Base>
 
@@ -170,5 +189,63 @@ const projects = (await getCollection('projects'))
     padding: 1.5rem;
     border-radius: 6px;
     color: var(--color-muted);
+  }
+
+  /* 个性签名：居中的书法体短句 */
+  .signature {
+    font-family: var(--font-calligraphy);
+    font-size: 1.05rem;
+    line-height: 1.9;
+    max-width: 640px;
+    margin: 2rem auto 1.6rem;
+    padding: 1.4rem 1.25rem 1.6rem;
+    color: var(--color-fg);
+    text-align: center;
+    font-style: normal;          /* 书法体自身带斜势，再 italic 会被外力破坏 */
+    position: relative;
+    quotes: none;
+    border: 0;
+  }
+  .signature::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 56px;
+    height: 2px;
+    background: var(--color-accent);
+    border-radius: 1px;
+  }
+  .signature::after {
+    content: "";
+    display: block;
+    width: 6px;
+    height: 6px;
+    margin: 0.85rem auto 0;
+    border-radius: 50%;
+    background: var(--color-accent);
+  }
+
+  /* 爱好区域：量级明显小一档，纯一行带图标，不做卡片 */
+  .hobbies {
+    text-align: center;
+    margin: 0.5rem 0 1rem;
+  }
+  .hobbies h2 {
+    font-size: 1.1rem;
+    color: var(--color-muted);
+    font-weight: 600;
+    letter-spacing: 0.4px;
+    margin: 0 0 0.65rem;
+  }
+  .hobby-list {
+    font-size: 0.95rem;
+    color: var(--color-fg);
+    margin: 0;
+    line-height: 1.9;
+  }
+  .hobby-list {
+    word-spacing: 0.25em;
   }
 </style>

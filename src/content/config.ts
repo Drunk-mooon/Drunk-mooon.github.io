@@ -33,7 +33,7 @@ const games = defineCollection({
 const projects = defineCollection({
   schema: z.object({
     title: z.string(),
-    description: z.string(),
+    description: z.string().optional(),
     github: z.string().url(),
     tags: z.array(z.string()).default([]),
     date: z.coerce.date(),
