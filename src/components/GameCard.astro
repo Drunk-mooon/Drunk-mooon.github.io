@@ -8,23 +8,38 @@ interface Props {
   video?: string;
   description: string;
   role?: string;
+  // —— 多语言支持 —— 中文版页面传 lang="zh"，并传 *_zh 字段
+  lang?: 'en' | 'zh';
+  title_zh?: string;
+  platform_zh?: string;
+  description_zh?: string;
+  role_zh?: string;
 }
 
-const { title, cover, platform, year, link, video, description, role } = Astro.props;
+const {
+  title, cover, platform, year, link, video, description, role,
+  lang = 'en',
+  title_zh, platform_zh, description_zh, role_zh,
+} = Astro.props;
+
+// 当前语言下要显示的字段：中文优先，否则 fallback 到英文
+const displayTitle       = lang === 'zh' && title_zh       ? title_zh       : title;
+const displayPlatform    = lang === 'zh' && platform_zh    ? platform_zh    : platform;
+const displayDescription = lang === 'zh' && description_zh ? description_zh : description;
+const displayRole        = lang === 'zh' && role_zh        ? role_zh        : role;
 
 // 把链接显示成纯净的地址（去掉 https:// 和末尾斜杠），便于一眼看清指向哪里
-const displayLink = link?.replace(/^https?:\/\//, '').replace(/\/$/, '');
+const displayLink  = link?.replace(/^https?:\/\//, '').replace(/\/$/, '');
 const displayVideo = video?.replace(/^https?:\/\//, '').replace(/\/$/, '');
 ---
 
 <li class="card game-card">
-  <img src={cover} alt={`${title} cover`} class="cover" />
+  <img src={cover} alt={`${displayTitle} cover`} class="cover" />
   <div class="info">
-    <h3>{title}</h3>
-    <p class="meta">{platform} · {year}{role && ` · ${role}`}</p>
-    <p>{description}</p>
+    <h3>{displayTitle}</h3>
+    <p class="meta">{displayPlatform} · {year}{displayRole && ` · ${displayRole}`}</p>
+    <p>{displayDescription}</p>
 
-    {/* link 和 video 放在同一个 .links 段落里，自动用 anchor 间距分隔 */}
     {(link || video) && (
       <p class="links">
         {link && <a href={link} target="_blank" rel="noopener">{displayLink}</a>}

@@ -27,6 +27,11 @@ const games = defineCollection({
     description: z.string(),
     role: z.string().optional(),
     date: z.coerce.date(),
+    // —— 中文版本可选覆盖字段（不写则 fallback 到英文版）——
+    title_zh: z.string().optional(),
+    platform_zh: z.string().optional(),
+    description_zh: z.string().optional(),
+    role_zh: z.string().optional(),
   }),
 });
 

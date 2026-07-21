@@ -1,11 +1,11 @@
 ---
-import Base from '../layouts/Base.astro';
-import PaperCard from '../components/PaperCard.astro';
-import GameCard from '../components/GameCard.astro';
-import ProjectCard from '../components/ProjectCard.astro';
+import Base from '../../layouts/Base.astro';
+import PaperCard from '../../components/PaperCard.astro';
+import GameCard from '../../components/GameCard.astro';
+import ProjectCard from '../../components/ProjectCard.astro';
 import { getCollection } from 'astro:content';
 
-// 收集所有内容，按时间倒序
+// 收集所有内容，按时间倒序（与英文版共用同一份数据）
 const papers = (await getCollection('papers'))
   .sort((a, b) => b.data.year - a.data.year || +b.data.date - +a.data.date);
 
@@ -16,34 +16,29 @@ const projects = (await getCollection('projects'))
   .sort((a, b) => +b.data.date - +a.data.date);
 ---
 
-<Base title="Yang Ziyue">
-  {/* ============ 区块 1：个人简介与照片 ============ */}
+<Base title="杨子越 | Yang Ziyue - 中文版">
+  {/* ============ 区块 1：个人简介与头像 ============ */}
   <section id="about" class="hero">
-    <img src="/images/avatar.png" alt="Yang Ziyue" class="avatar" />
-    <h1>Yang Ziyue</h1>
+    <img src="/images/avatar.png" alt="杨子越" class="avatar" />
+    <h1>杨子越 </h1>
     <p class="subtitle">
-      Master Student @ SJTU · AI Agents · Indie Game Developer
+      上海交通大学硕士生 · AI 智能体 · 独立游戏开发者
     </p>
     <p class="bio">
-      I am a master's student in the School of Computer Science at Shanghai Jiao Tong University. I'm studying at <a href="http://speechlab.sjtu.edu.cn/" target="_blank" rel="noopener">X-lance lab</a> under the guidance of Professcor ChenLu
+      我是上海交通大学计算机学院的在读硕士，目前在 <a href="http://speechlab.sjtu.edu.cn/" target="_blank" rel="noopener">X-lance 实验室</a>，导师是陈露老师。
     </p>
     <p class="bio">
-      Welcome to my personal sites. Here includes <a href="#papers">Research Papers</a>,
-      <a href="#games">Game Made</a>, and participated <a href="#projects">Open-Source Repositories</a>.
-      My research interests lie in scientific research agents and reinforcement learning.
-      Additionally, I am an entry-level game developer who has undertaken program and design roles for several independent games.
+      欢迎来到我的个人主页。这里收录了我的<a href="#papers">研究论文</a>、
+      <a href="#games">制作的游戏</a>，以及参与的<a href="#projects">开源项目</a>。
+      我的研究兴趣是科学智能体与强化学习，同时我也是一名入门级独立游戏开发者，参与过多款游戏的程序与设计工作。
     </p>
 
-    {/* 个性签名（书法体）—— 直接分区，不加「个人签名：」之类的标签 */}
     <blockquote class="signature">
-      the orgiastic future that year by year recedes before us. it eluded us then,<br />
-      but that's no matter — tomorrow we will run faster, stretch out arms farther…<br />
-      and one fine morning — so we beat on, boats against the current,<br />
-      borne back ceaselessly into the past. — <em>The Great Gatsby</em>
+      盖茨比一生的信念就寄托在这盏绿灯上，这个一年一年死在我们眼前、渐渐远去的极乐未来。它曾从我们身边溜走，不过没有关系——明天我们会跑得更快，手臂伸得更远…总有一个美好的清晨——我们奋力前行，逆水行舟，不断地被浪潮推回到过去。 — 《了不起的盖茨比》
     </blockquote>
 
     <div class="links">
-      <a href="mailto:1369700255@qq.com">✉️ Email</a>
+      <a href="mailto:1369700255@qq.com">✉️ 邮箱</a>
       <a href="https://github.com/Drunk-mooon" target="_blank" rel="noopener">🐙 GitHub</a>
       <a href="https://twitter.com/DrunkMooon_" target="_blank" rel="noopener">🐦 Twitter</a>
     </div>
@@ -53,8 +48,8 @@ const projects = (await getCollection('projects'))
 
   {/* ============ 区块 2：论文 ============ */}
   <section id="papers">
-    <h2>📄 Papers</h2>
-    <p class="lead">Arrange in descending order of publication year.</p>
+    <h2>📄 论文</h2>
+    <p class="lead">按发表年份倒序排列。</p>
 
     {papers.length === 0 ? (
       <p class="empty">还没有论文。在 <code>src/content/papers/</code> 下新建 <code>.md</code> 文件即可添加。</p>
@@ -82,8 +77,8 @@ const projects = (await getCollection('projects'))
 
   {/* ============ 区块 3：游戏 ============ */}
   <section id="games">
-    <h2>🎮 Games</h2>
-    <p class="lead">Game demos that I have participated in or independently produced.</p>
+    <h2>🎮 游戏</h2>
+    <p class="lead">我参与或独立制作的游戏作品。</p>
 
     {games.length === 0 ? (
       <p class="empty">还没有游戏。在 <code>src/content/games/</code> 下新建 <code>.md</code> 文件即可添加。</p>
@@ -99,6 +94,11 @@ const projects = (await getCollection('projects'))
             video={g.data.video}
             description={g.data.description}
             role={g.data.role}
+            lang="zh"
+            title_zh={g.data.title_zh}
+            platform_zh={g.data.platform_zh}
+            description_zh={g.data.description_zh}
+            role_zh={g.data.role_zh}
           />
         ))}
       </ul>
@@ -109,8 +109,8 @@ const projects = (await getCollection('projects'))
 
   {/* ============ 区块 4：开源项目 ============ */}
   <section id="projects">
-    <h2>🛠 Open Source Projects</h2>
-    <p class="lead">The open-source projects that I maintain or primarily participate in on GitHub.</p>
+    <h2>🛠 开源项目</h2>
+    <p class="lead">我在 GitHub 上维护或主要参与的开源项目。</p>
 
     {projects.length === 0 ? (
       <p class="empty">还没有项目。在 <code>src/content/projects/</code> 下新建 <code>.md</code> 文件即可添加。</p>
@@ -131,9 +131,9 @@ const projects = (await getCollection('projects'))
 
   <hr class="divider" />
 
-  {/* ============ 区块 5：爱好（最末，量级最小） ============ */}
+  {/* ============ 区块 5：爱好 ============ */}
   <section id="hobbies" class="hobbies">
-    <h2>🌿 Hobbies</h2>
+    <h2>🌿 爱好</h2>
     <p class="hobby-list">
       🎮 PC GAME · 🎸 Guitar · ✨ ACG · 🏀 Basketball &amp; NBA · 📚 Reading
     </p>

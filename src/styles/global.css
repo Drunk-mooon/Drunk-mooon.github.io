@@ -10,8 +10,8 @@
   --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC",
     "Hiragino Sans GB", "Microsoft YaHei", "Helvetica Neue", Arial, sans-serif;
   --font-mono: "SF Mono", Menlo, Monaco, Consolas, "Courier New", monospace;
-  --font-calligraphy: "Cinzel", "ZCOOL XiaoWei", "STKaiti",
-    "KaiTi", "Kaiti SC", "楷体", serif;
+  --font-calligraphy: "Cormorant Garamond", "Ma Shan Zheng", "ZCOOL XiaoWei",
+    "STKaiti", "KaiTi", "Kaiti SC", "楷体", serif;
   --max-width: 860px;
 }
 
@@ -109,4 +109,112 @@ code {
   padding: 0.1em 0.6em;
   font-size: 0.8rem;
   margin-right: 0.3rem;
+}
+
+/* ---------- Hero / 区块顶部 ---------- */
+.hero {
+  text-align: center;
+  padding: 2.5rem 0 2rem;
+}
+.avatar {
+  width: 160px;
+  height: 160px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid var(--color-border);
+}
+.hero h1 {
+  margin: 1rem 0 0.25rem;
+  font-size: 2rem;
+}
+.subtitle {
+  color: var(--color-muted);
+  margin: 0 0 1rem;
+}
+.bio {
+  max-width: 620px;
+  margin: 0 auto 0.75rem;
+  color: var(--color-fg);
+}
+.links {
+  margin-top: 1.25rem;
+}
+.links a {
+  margin: 0 0.4rem;
+  display: inline-block;
+}
+
+/* ---------- 通用区块元素（中英两个页面共享） ---------- */
+section { scroll-margin-top: 70px; }
+
+.lead { color: var(--color-muted); margin-top: -0.5rem; }
+
+.divider {
+  border: none;
+  border-top: 1px solid var(--color-border);
+  margin: 3rem 0;
+}
+
+.empty {
+  background: var(--color-card);
+  border: 1px dashed var(--color-border);
+  padding: 1.5rem;
+  border-radius: 6px;
+  color: var(--color-muted);
+}
+
+/* ---------- 个性签名 ---------- */
+.signature {
+  font-family: var(--font-calligraphy);
+  font-size: 1.05rem;
+  line-height: 1.9;
+  max-width: 640px;
+  margin: 2rem auto 1.6rem;
+  padding: 1.4rem 1.25rem 1.6rem;
+  color: var(--color-fg);
+  text-align: center;
+  font-style: normal;
+  position: relative;
+  quotes: none;
+  border: 0;
+}
+.signature::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 56px;
+  height: 2px;
+  background: var(--color-accent);
+  border-radius: 1px;
+}
+.signature::after {
+  content: "";
+  display: block;
+  width: 6px;
+  height: 6px;
+  margin: 0.85rem auto 0;
+  border-radius: 50%;
+  background: var(--color-accent);
+}
+
+/* ---------- 爱好区 ---------- */
+.hobbies {
+  text-align: center;
+  margin: 0.5rem 0 1rem;
+}
+.hobbies h2 {
+  font-size: 1.1rem;
+  color: var(--color-muted);
+  font-weight: 600;
+  letter-spacing: 0.4px;
+  margin: 0 0 0.65rem;
+}
+.hobby-list {
+  font-size: 0.95rem;
+  color: var(--color-fg);
+  margin: 0;
+  line-height: 1.9;
+  word-spacing: 0.25em;
 }

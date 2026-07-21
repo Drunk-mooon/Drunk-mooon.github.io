@@ -1,10 +1,27 @@
 ---
-const links = [
-  { href: '#about', label: 'About' },
-  { href: '#papers', label: 'Papers' },
-  { href: '#games', label: 'Games' },
-  { href: '#projects', label: 'Projects' },
-];
+// i18n：根据 URL 路径判断当前语言，渲染对应语言的导航 + 「切换到另一语言」链接
+const path = Astro.url.pathname;
+const isZh = path.startsWith('/zh');
+
+const links = isZh
+  ? [
+      { href: '#about', label: '关于' },
+      { href: '#papers', label: '论文' },
+      { href: '#games', label: '游戏' },
+      { href: '#projects', label: '项目' },
+      { href: '#hobbies', label: '爱好' },
+    ]
+  : [
+      { href: '#about', label: 'About' },
+      { href: '#papers', label: 'Papers' },
+      { href: '#games', label: 'Games' },
+      { href: '#projects', label: 'Projects' },
+      { href: '#hobbies', label: 'Hobbies' },
+    ];
+
+const switchHref = isZh ? '/' : '/zh/';
+const switchLabel = isZh ? 'EN' : '中';
+const switchTitle = isZh ? 'Switch to English' : '切换到中文';
 ---
 
 <header class="nav">
@@ -14,6 +31,9 @@ const links = [
       {links.map(l => (
         <a href={l.href} class="nav-link">{l.label}</a>
       ))}
+      <a href={switchHref} class="nav-link lang-switch" title={switchTitle} aria-label={switchTitle}>
+        {switchLabel}
+      </a>
     </nav>
   </div>
 </header>
@@ -41,10 +61,22 @@ const links = [
     font-size: 1.05rem;
   }
   .brand:hover { text-decoration: none; }
-  nav { display: flex; gap: 1.2rem; flex-wrap: wrap; }
+  nav {
+    display: flex;
+    gap: 1.2rem;
+    flex-wrap: wrap;
+    align-items: center;
+  }
   .nav-link {
     color: var(--color-muted);
     font-size: 0.95rem;
   }
   .nav-link:hover { color: var(--color-fg); text-decoration: none; }
+  .lang-switch {
+    margin-left: 0.3rem;
+    padding-left: 0.9rem;
+    border-left: 1px solid var(--color-border);
+    font-weight: 600;
+    color: var(--color-fg);
+  }
 </style>
