@@ -38,7 +38,7 @@ const projects = (await getCollection('projects'))
     </blockquote>
 
     <div class="links">
-      <a href="mailto:1369700255@qq.com">✉️ 邮箱</a>
+      <a href="mailto:yang-_-ziyue@sjtu.edu.com">✉️ 邮箱</a>
       <a href="https://github.com/Drunk-mooon" target="_blank" rel="noopener">🐙 GitHub</a>
       <a href="https://twitter.com/DrunkMooon_" target="_blank" rel="noopener">🐦 Twitter</a>
     </div>
@@ -50,6 +50,10 @@ const projects = (await getCollection('projects'))
   <section id="papers">
     <h2>📄 论文</h2>
     <p class="lead">按发表年份倒序排列。</p>
+    <blockquote class="epigraph">
+      「我是 Amadeus，做着梦的 Amadeus。」
+      <footer>——《命运石之门》</footer>
+    </blockquote>
 
     {papers.length === 0 ? (
       <p class="empty">还没有论文。在 <code>src/content/papers/</code> 下新建 <code>.md</code> 文件即可添加。</p>
@@ -79,6 +83,10 @@ const projects = (await getCollection('projects'))
   <section id="games">
     <h2>🎮 游戏</h2>
     <p class="lead">我参与或独立制作的游戏作品。</p>
+    <blockquote class="epigraph">
+      这里算是一个去处。这是你拥有的一切，但它好歹还算点什么。
+      <footer>——《极乐迪斯科》</footer>
+    </blockquote>
 
     {games.length === 0 ? (
       <p class="empty">还没有游戏。在 <code>src/content/games/</code> 下新建 <code>.md</code> 文件即可添加。</p>
@@ -111,6 +119,10 @@ const projects = (await getCollection('projects'))
   <section id="projects">
     <h2>🛠 开源项目</h2>
     <p class="lead">我在 GitHub 上维护或主要参与的开源项目。</p>
+    <blockquote class="epigraph">
+      「原型并不存在。」
+      <footer>——《攻壳机动队》(Stand Alone Complex)</footer>
+    </blockquote>
 
     {projects.length === 0 ? (
       <p class="empty">还没有项目。在 <code>src/content/projects/</code> 下新建 <code>.md</code> 文件即可添加。</p>

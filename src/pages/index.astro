@@ -43,7 +43,7 @@ const projects = (await getCollection('projects'))
     </blockquote>
 
     <div class="links">
-      <a href="mailto:1369700255@qq.com">✉️ Email</a>
+      <a href="mailto:yang-_-ziyue@sjtu.edu.com">✉️ Email</a>
       <a href="https://github.com/Drunk-mooon" target="_blank" rel="noopener">🐙 GitHub</a>
       <a href="https://twitter.com/DrunkMooon_" target="_blank" rel="noopener">🐦 Twitter</a>
     </div>
@@ -55,6 +55,10 @@ const projects = (await getCollection('projects'))
   <section id="papers">
     <h2>📄 Papers</h2>
     <p class="lead">Arrange in descending order of publication year.</p>
+    <blockquote class="epigraph">
+      I am Amadeus, the Amadeus that dreams.
+      <footer>— <cite>Steins;Gate</cite></footer>
+    </blockquote>
 
     {papers.length === 0 ? (
       <p class="empty">还没有论文。在 <code>src/content/papers/</code> 下新建 <code>.md</code> 文件即可添加。</p>
@@ -84,6 +88,10 @@ const projects = (await getCollection('projects'))
   <section id="games">
     <h2>🎮 Games</h2>
     <p class="lead">Game demos that I have participated in or independently produced.</p>
+    <blockquote class="epigraph">
+      This is somewhere to be. This is all you have, but it's still something.
+      <footer>— <cite>Disco Elysium</cite></footer>
+    </blockquote>
 
     {games.length === 0 ? (
       <p class="empty">还没有游戏。在 <code>src/content/games/</code> 下新建 <code>.md</code> 文件即可添加。</p>
@@ -111,6 +119,10 @@ const projects = (await getCollection('projects'))
   <section id="projects">
     <h2>🛠 Open Source Projects</h2>
     <p class="lead">The open-source projects that I maintain or primarily participate in on GitHub.</p>
+    <blockquote class="epigraph">
+      The prototype does not exist.
+      <footer>— <cite>Ghost in the Shell: Stand Alone Complex</cite></footer>
+    </blockquote>
 
     {projects.length === 0 ? (
       <p class="empty">还没有项目。在 <code>src/content/projects/</code> 下新建 <code>.md</code> 文件即可添加。</p>
