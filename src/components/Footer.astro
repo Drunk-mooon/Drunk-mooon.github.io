@@ -1,5 +1,12 @@
 ---
 const year = new Date().getFullYear();
+
+// 根据当前路径判断语言，渲染对应的尾页引文
+const isZh = Astro.url.pathname.startsWith('/zh');
+
+const quote = isZh
+  ? '我曾经想过变成一个堵上眼睛和耳朵，缄口不言的人，我应该这样做吗？'
+  : "I thought what I'd do was, I'd pretend I was one of those deaf-mutes, or should I?";
 ---
 
 <footer class="footer">
@@ -11,6 +18,9 @@ const year = new Date().getFullYear();
       <a href="https://scholar.google.com/citations?user=YOUR_SCHOLAR_ID" target="_blank" rel="noopener">Scholar</a>
     </span>
   </div>
+
+  {/* 尾页小字引文：放在 © 行下方，居中、更小一号 */}
+  <p class="footer-quote">{quote}</p>
 </footer>
 
 <style>
@@ -31,4 +41,17 @@ const year = new Date().getFullYear();
   }
   .links a { color: var(--color-muted); }
   .links a:hover { color: var(--color-accent); }
+
+  .footer-quote {
+    max-width: var(--max-width);
+    margin: 0.5rem auto 0;
+    padding-top: 0.55rem;
+    border-top: 1px dashed var(--color-border);
+    text-align: center;
+    font-size: 0.78rem;
+    font-style: italic;
+    color: var(--color-muted);
+    line-height: 1.7;
+    opacity: 0.85;
+  }
 </style>
