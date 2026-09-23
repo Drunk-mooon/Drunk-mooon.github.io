@@ -6,4 +6,5 @@ year: 2026
 pdf: "https://arxiv.org/abs/2606.08016"
 code: "https://github.com/OpenDFM/Image_Edit_Agent"
 date: 2026-02
+tldr: "A conversational image editing agent for amateur users that operates 16 parameterized tools in an explicit, interpretable action space, trained via a three-stage multitask pipeline (SFT, GRPO, synthetic fine-tuning)."
 ---

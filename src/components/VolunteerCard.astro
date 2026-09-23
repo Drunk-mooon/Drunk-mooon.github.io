@@ -1,0 +1,55 @@
+---
+interface Props {
+  title: string;
+  image: string;
+  time: string;
+  description: string;
+  // —— 多语言支持 —— 中文版页面传 lang="zh"，并传 *_zh 字段
+  lang?: 'en' | 'zh';
+  title_zh?: string;
+  description_zh?: string;
+  time_zh?: string;
+}
+
+const {
+  title, image, time, description,
+  lang = 'en',
+  title_zh, description_zh, time_zh,
+} = Astro.props;
+
+// 当前语言下要显示的字段：中文优先，否则 fallback 到英文
+const displayTitle       = lang === 'zh' && title_zh       ? title_zh       : title;
+const displayTime        = lang === 'zh' && time_zh        ? time_zh        : time;
+const displayDescription = lang === 'zh' && description_zh ? description_zh : description;
+---
+
+<li class="card volunteer-card">
+  <img src={image} alt={`${displayTitle} photo`} class="photo" />
+  <div class="info">
+    <h3>{displayTitle}</h3>
+    <p class="meta">{displayTime}</p>
+    <p>{displayDescription}</p>
+  </div>
+</li>
+
+<style>
+  .volunteer-card {
+    display: flex;
+    gap: 1.25rem;
+    align-items: flex-start;
+  }
+  .photo {
+    width: 240px;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 10px;
+    flex-shrink: 0;
+    background: var(--color-border);
+  }
+  .info { flex: 1; min-width: 0; }
+  .info h3 { margin-top: 0; }
+  @media (max-width: 520px) {
+    .volunteer-card { flex-direction: column; }
+    .photo { width: 100%; height: 200px; }
+  }
+</style>

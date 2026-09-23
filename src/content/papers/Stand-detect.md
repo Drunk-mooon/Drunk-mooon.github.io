@@ -5,4 +5,5 @@ venue: "ChinaMM English, Springer Nature Multimedia Article"
 year: 2025
 pdf: "https://link.springer.com/article/10.1007/s00530-026-02223-y"
 date: 2025-08
+tldr: "A collaborative multi-role reasoning framework with adaptive modality filtering that reduces image bias for multimodal stance detection."
 ---

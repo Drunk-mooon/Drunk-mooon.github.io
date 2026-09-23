@@ -35,6 +35,20 @@ const games = defineCollection({
   }),
 });
 
+const volunteers = defineCollection({
+  schema: z.object({
+    title: z.string(),
+    image: z.string(),
+    time: z.string(),
+    description: z.string(),
+    date: z.coerce.date(), // 用于排序
+    // —— 中文版本可选覆盖字段（不写则 fallback 到英文版）——
+    title_zh: z.string().optional(),
+    time_zh: z.string().optional(),
+    description_zh: z.string().optional(),
+  }),
+});
+
 const projects = defineCollection({
   schema: z.object({
     title: z.string(),
@@ -45,4 +59,4 @@ const projects = defineCollection({
   }),
 });
 
-export const collections = { papers, games, projects };
+export const collections = { papers, games, volunteers, projects };

@@ -12,7 +12,7 @@
   --font-mono: "SF Mono", Menlo, Monaco, Consolas, "Courier New", monospace;
   --font-calligraphy: "Cormorant Garamond", "Ma Shan Zheng", "ZCOOL XiaoWei",
     "STKaiti", "KaiTi", "Kaiti SC", "楷体", serif;
-  --max-width: 860px;
+  --max-width: 1020px;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -73,11 +73,12 @@ code {
 }
 
 .card {
-  border-left: 3px solid var(--color-accent);
+  border: 1px solid var(--color-border);
+  border-left: 3px solid color-mix(in srgb, var(--color-accent) 45%, transparent);
   background: var(--color-card);
-  padding: 1rem 1.25rem;
+  padding: 1.1rem 1.35rem;
   margin: 0 0 1rem;
-  border-radius: 0 6px 6px 0;
+  border-radius: 10px;
 }
 
 .card h3 {
@@ -132,7 +133,7 @@ code {
   margin: 0 0 1rem;
 }
 .bio {
-  max-width: 620px;
+  max-width: 680px;
   margin: 0 auto 0.75rem;
   color: var(--color-fg);
 }
@@ -159,8 +160,30 @@ section { scroll-margin-top: 70px; }
   background: var(--color-card);
   border: 1px dashed var(--color-border);
   padding: 1.5rem;
-  border-radius: 6px;
+  border-radius: 12px;
   color: var(--color-muted);
+}
+
+/* ---------- 个人荣誉 ---------- */
+.honors {
+  list-style: none;
+  padding: 0;
+  margin: 1.5rem 0;
+}
+.honors li {
+  display: flex;
+  gap: 1.25rem;
+  align-items: baseline;
+  padding: 0.6rem 0.25rem;
+  border-bottom: 1px solid var(--color-border);
+}
+.honors li:last-child { border-bottom: none; }
+.honor-year {
+  font-family: var(--font-mono);
+  color: var(--color-muted);
+  font-size: 0.9rem;
+  flex-shrink: 0;
+  min-width: 3.5em;
 }
 
 /* ---------- 题记：区块 lead 后面的引文 ---------- */

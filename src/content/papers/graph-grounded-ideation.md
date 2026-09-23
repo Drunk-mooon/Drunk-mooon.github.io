@@ -4,6 +4,6 @@ authors: "Zijian Hu, Hanqi Li, Zijian Wang, Tiancheng Huang, Chenrun Wang, **Ziy
 venue: "COLM"
 year: 2026
 date: 2026-09
+tldr: "Formulates scientific ideation as hierarchical search over a method-level scientific evidence graph: exploring mechanism directions, then closing proposals by binding ideas to concrete baselines, datasets, and experimental protocols, with the clearest gains in feasibility and evidence consistency."
+pdf: "https://openreview.net/pdf?id=OtfkmjpjqT"
 ---
-
-<!-- TODO: 占位信息，待修正：作者列表按 Xcientist 团队猜测，venue 待定，暂无 PDF 链接 -->

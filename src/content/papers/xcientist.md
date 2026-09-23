@@ -5,4 +5,5 @@ venue: "arXiv preprint"
 year: 2026
 pdf: "https://arxiv.org/abs/2606.18874"
 date: 2026-06
+tldr: "Introduces Xcientist, a research harness that externalizes literature synthesis and experimental validation into inspectable, contract-governed artifacts, keeping AI scientists' claims attributable and preventing claim drift."
 ---

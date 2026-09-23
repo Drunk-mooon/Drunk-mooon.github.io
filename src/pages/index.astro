@@ -2,6 +2,7 @@
 import Base from '../layouts/Base.astro';
 import PaperCard from '../components/PaperCard.astro';
 import GameCard from '../components/GameCard.astro';
+import VolunteerCard from '../components/VolunteerCard.astro';
 import ProjectCard from '../components/ProjectCard.astro';
 import { getCollection } from 'astro:content';
 
@@ -14,6 +15,9 @@ const games = (await getCollection('games'))
 
 const projects = (await getCollection('projects'))
   .sort((a, b) => +b.data.date - +a.data.date);
+
+const volunteers = (await getCollection('volunteers'))
+  .sort((a, b) => +b.data.date - +a.data.date);
 ---
 
 <Base title="Yang Ziyue">
@@ -25,11 +29,12 @@ const projects = (await getCollection('projects'))
       Master Student @ SJTU · AI Agents · Indie Game Developer
     </p>
     <p class="bio">
-      I am a master's student in the School of Computer Science at Shanghai Jiao Tong University. I'm studying at <a href="http://speechlab.sjtu.edu.cn/" target="_blank" rel="noopener">X-lance lab</a> under the guidance of Professcor ChenLu
+      I am a master's student in the School of Computer Science at Shanghai Jiao Tong University. I'm studying at <a href="http://speechlab.sjtu.edu.cn/" target="_blank" rel="noopener">X-lance lab</a> under the guidance of <a href="https://coai-sjtu.github.io/" target="_blank" rel="noopener">Professor Chen Lu</a>
     </p>
     <p class="bio">
       Welcome to my personal sites. Here includes <a href="#papers">Research Papers</a>,
-      <a href="#games">Game Made</a>, and participated <a href="#projects">Open-Source Repositories</a>.
+      <a href="#games">Games Made</a>, my <a href="#honors">Honors</a>,
+      and my <a href="#volunteer">Volunteer Work</a>.
       My research interests lie in scientific research agents and reinforcement learning.
       Additionally, I am an entry-level game developer who has undertaken program and design roles for several independent games.
     </p>
@@ -115,7 +120,26 @@ const projects = (await getCollection('projects'))
 
   <hr class="divider" />
 
-  {/* ============ 区块 4：开源项目 ============ */}
+  {/* ============ 区块 4：个人荣誉（开源项目暂时下线，代码保留见下方注释） ============ */}
+  <section id="honors">
+    <h2>🏆 Honors</h2>
+    <p class="lead">Scholarships and awards I have received.</p>
+    <blockquote class="epigraph">
+      It's the kind of thing that makes you glad you stopped and smelled the pine trees along the way.
+      <footer>— Gabbro, <cite>Outer Wilds</cite></footer>
+    </blockquote>
+
+    <ul class="honors">
+      <li><span class="honor-year">2026</span><span>Outstanding Graduate of Shanghai Jiao Tong University (Class of 2026)</span></li>
+      <li><span class="honor-year">2025</span><span>Tang Zhongying Scholarship</span></li>
+      <li><span class="honor-year">2024</span><span>Huawei Scholarship</span></li>
+      <li><span class="honor-year">2024</span><span>SJTU Undergraduate Second-Class Excellence Scholarship, AY 2023–2024 (Top 10%)</span></li>
+      <li><span class="honor-year">2024</span><span>Honorable Mention, MCM/ICM (Mathematical Contest in Modeling)</span></li>
+      <li><span class="honor-year">2023</span><span>First Prize, "Shanshu Cup" Collegiate Mathematical Modeling Elite League</span></li>
+    </ul>
+  </section>
+
+  {/* ============ 区块 4（备用）：开源项目，暂时下线，恢复时与导航/简介锚点一起换回 ============
   <section id="projects">
     <h2>🛠 Open Source Projects</h2>
     <p class="lead">The open-source projects that I maintain or primarily participate in on GitHub.</p>
@@ -140,10 +164,38 @@ const projects = (await getCollection('projects'))
       </ul>
     )}
   </section>
+  ============ 区块 4（备用）结束 ============ */}
 
   <hr class="divider" />
 
-  {/* ============ 区块 5：爱好（最末，量级最小） ============ */}
+  {/* ============ 区块 5：志愿项目 ============ */}
+  <section id="volunteer">
+    <h2>🤝 Volunteer Work</h2>
+    <p class="lead">Volunteer programs that I have taken part in.</p>
+    <blockquote class="epigraph">
+      There ain't no shame in looking for a better world.
+      <footer>— Arthur Morgan, <cite>Red Dead Redemption 2</cite></footer>
+    </blockquote>
+
+    {volunteers.length === 0 ? (
+      <p class="empty">还没有志愿项目。在 <code>src/content/volunteers/</code> 下新建 <code>.md</code> 文件即可添加。</p>
+    ) : (
+      <ul class="cards">
+        {volunteers.map(v => (
+          <VolunteerCard
+            title={v.data.title}
+            image={v.data.image}
+            time={v.data.time}
+            description={v.data.description}
+          />
+        ))}
+      </ul>
+    )}
+  </section>
+
+  <hr class="divider" />
+
+  {/* ============ 区块 6：爱好（最末，量级最小） ============ */}
   <section id="hobbies" class="hobbies">
     <h2>🌿 Hobbies</h2>
     <p class="hobby-list">

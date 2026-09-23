@@ -2,6 +2,7 @@
 import Base from '../../layouts/Base.astro';
 import PaperCard from '../../components/PaperCard.astro';
 import GameCard from '../../components/GameCard.astro';
+import VolunteerCard from '../../components/VolunteerCard.astro';
 import ProjectCard from '../../components/ProjectCard.astro';
 import { getCollection } from 'astro:content';
 
@@ -14,6 +15,9 @@ const games = (await getCollection('games'))
 
 const projects = (await getCollection('projects'))
   .sort((a, b) => +b.data.date - +a.data.date);
+
+const volunteers = (await getCollection('volunteers'))
+  .sort((a, b) => +b.data.date - +a.data.date);
 ---
 
 <Base title="杨子越 | Yang Ziyue - 中文版">
@@ -25,11 +29,12 @@ const projects = (await getCollection('projects'))
       上海交通大学硕士生 · AI 智能体 · 独立游戏开发者
     </p>
     <p class="bio">
-      我是上海交通大学计算机学院的在读硕士，目前在 <a href="http://speechlab.sjtu.edu.cn/" target="_blank" rel="noopener">X-lance 实验室</a>，导师是陈露老师。
+      我是上海交通大学计算机学院的在读硕士，目前在 <a href="http://speechlab.sjtu.edu.cn/" target="_blank" rel="noopener">X-lance 实验室</a>，导师是<a href="https://coai-sjtu.github.io/" target="_blank" rel="noopener">陈露老师</a>。
     </p>
     <p class="bio">
       欢迎来到我的个人主页。这里收录了我的<a href="#papers">研究论文</a>、
-      <a href="#games">制作的游戏</a>，以及参与的<a href="#projects">开源项目</a>。
+      <a href="#games">制作的游戏</a>、<a href="#honors">个人荣誉</a>，
+      以及<a href="#volunteer">志愿项目</a>。
       我的研究兴趣是科学智能体与强化学习，同时我也是一名入门级独立游戏开发者，参与过多款游戏的程序与设计工作。
     </p>
 
@@ -115,7 +120,26 @@ const projects = (await getCollection('projects'))
 
   <hr class="divider" />
 
-  {/* ============ 区块 4：开源项目 ============ */}
+  {/* ============ 区块 4：个人荣誉（开源项目暂时下线，代码保留见下方注释） ============ */}
+  <section id="honors">
+    <h2>🏆 个人荣誉</h2>
+    <p class="lead">我曾获得的奖学金与竞赛奖项。</p>
+    <blockquote class="epigraph">
+      「这会让你庆幸，自己曾停下来闻过沿途的松树。」
+      <footer>——加布罗，《星际拓荒》（Outer Wilds）</footer>
+    </blockquote>
+
+    <ul class="honors">
+      <li><span class="honor-year">2026</span><span>上海交通大学优秀毕业生（2026 届）</span></li>
+      <li><span class="honor-year">2025</span><span>唐仲英奖学金</span></li>
+      <li><span class="honor-year">2024</span><span>华为奖学金</span></li>
+      <li><span class="honor-year">2024</span><span>上海交通大学 2023-2024 学年本科生 B 等优秀奖学金（前 10%）</span></li>
+      <li><span class="honor-year">2024</span><span>全美大学生数学建模竞赛（MCM/ICM）H 奖</span></li>
+      <li><span class="honor-year">2023</span><span>「杉树杯」高校数学建模精英联赛一等奖</span></li>
+    </ul>
+  </section>
+
+  {/* ============ 区块 4（备用）：开源项目，暂时下线，恢复时与导航/简介锚点一起换回 ============
   <section id="projects">
     <h2>🛠 开源项目</h2>
     <p class="lead">我在 GitHub 上维护或主要参与的开源项目。</p>
@@ -140,10 +164,42 @@ const projects = (await getCollection('projects'))
       </ul>
     )}
   </section>
+  ============ 区块 4（备用）结束 ============ */}
 
   <hr class="divider" />
 
-  {/* ============ 区块 5：爱好 ============ */}
+  {/* ============ 区块 5：志愿项目 ============ */}
+  <section id="volunteer">
+    <h2>🤝 志愿项目</h2>
+    <p class="lead">我参与过的志愿服务项目。</p>
+    <blockquote class="epigraph">
+      「寻找一个更好的世界，并没有什么可耻的。」
+      <footer>——亚瑟·摩根，《荒野大镖客 2》（Red Dead Redemption 2）</footer>
+    </blockquote>
+
+    {volunteers.length === 0 ? (
+      <p class="empty">还没有志愿项目。在 <code>src/content/volunteers/</code> 下新建 <code>.md</code> 文件即可添加。</p>
+    ) : (
+      <ul class="cards">
+        {volunteers.map(v => (
+          <VolunteerCard
+            title={v.data.title}
+            image={v.data.image}
+            time={v.data.time}
+            description={v.data.description}
+            lang="zh"
+            title_zh={v.data.title_zh}
+            time_zh={v.data.time_zh}
+            description_zh={v.data.description_zh}
+          />
+        ))}
+      </ul>
+    )}
+  </section>
+
+  <hr class="divider" />
+
+  {/* ============ 区块 6：爱好 ============ */}
   <section id="hobbies" class="hobbies">
     <h2>🌿 爱好</h2>
     <p class="hobby-list">
